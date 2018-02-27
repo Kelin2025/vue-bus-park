@@ -1,6 +1,6 @@
 {
   "name": "vue-bus-park",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Enhanced events emmiting in Vue.js applications",
   "main": "index.js",
   "repository": "https://github.com/kelin2025/vue-bus-park",

@@ -3,8 +3,20 @@ export default function VueBusPark(Vue, busesList) {
 
   const addBus = (name, bus) => {
     buses[name] = bus
-    buses[name].on = buses[name].on || buses[name].addEventListener
-    buses[name].emit = bus.emit || bus.send
+    bus.on = function(evt, cb) {
+      if (buses[name].on) {
+        const offByOn = bus.on(evt, cb)
+        const offByOff = () => {
+          bus.off(evt, cb)
+        }
+        return bus.off ? offByOff : offByOn
+      }
+      bus.addEventListener(evt, cb)
+      return () => {
+        bus.removeEventListener(evt, cb)
+      }
+    }
+    bus.emit = bus.emit || bus.send
   }
 
   const createControls = vm => {

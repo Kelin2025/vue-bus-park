@@ -70,19 +70,4 @@ export default function VueBusPark(Vue, busesList) {
   })
 }
 
-export function SocketBus(url, options) {
-  const socket = new WebSocket(url, options)
-  return {
-    on(evt, cb) {
-      socket.addEventListener(evt, cb)
-      return function() {
-        socket.removeEventListener(evt, cb)
-      }
-    },
-    emit() {
-      socket.send.apply(socket, arguments)
-    }
-  }
-}
-
 export { default as Bus } from 'nanoevents'
